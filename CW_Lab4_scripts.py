@@ -1,7 +1,7 @@
 import arcpy
 import pandas as pd
 import matplotlib.pyplot as plt
-import Lab4_functions as l4
+import CW_Lab4_functions as l4
 import importlib
 
 
@@ -24,7 +24,7 @@ import importlib
 #   
 # Set the workspace to point to the geodatabase you are using for this lab
 
-arcpy.env.workspace = r"R:\2025\Spring\GEOG562\Instructors\kennedy_2025\Lab4\Lab4_arcproject_REK\Lab4_arcproject_REK.gdb" 
+arcpy.env.workspace = r"R:\2025\Spring\GEOG562\Students\wintecri\Lab4\lab4_arcproject_cw\lab4_arcproject_cw.gdb" 
 
 ############################################################################
 # Block 3:  We are going to work with the notion of extending raster objects
@@ -46,7 +46,10 @@ print(r.metadata["bounds"])
 # Question 1
 #  Why do we need to use the "super()" function in the definition of the SmartRaster?
 
-# Your answer:
+# Your answer: Copilot tells me that the super function allows me to access the parent class methods (like __init__) without
+#explicitly naming the parents class. It also avoids having to hardcode the parent class name. 
+#It also ensures the method resolution order is followed, and allows for the child class to build upon the functionality of
+#the parent class without duplicating code.
 
 
 
