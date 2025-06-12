@@ -32,78 +32,37 @@ class SmartRaster(arcpy.Raster):
         }
 
 
-    #def calculate_ndvi(self,  band4_index = 4, band3_index = 3):
+    # def calculate_ndvi(self,  band4_index = 4, band3_index = 3):
 
-        #"""Calculate NDVI using the NIR and Red bands."""
+    #     """Calculate NDVI using the NIR and Red bands."""
        
-    #    # set up an indicator about whether things work for later
-    #okay = True
+    #     # set up an indicator about whether things work for later
+    #     okay = True
 
     #     #embed everything in a try/except block
     #     # First get the bands.  You can use the band numbers to get the bands
     #     #   from the raster. 
 
     #     # Your code:
-arcpy.env.workspace = r"R:\2025\Spring\GEOG562\Students\wintecri\Lab4\lab4_arcproject_cw\lab4_arcproject_cw.gdb" 
-arcpy.ListRasters()  # should list it
-print(arcpy.env.workspace)
 
 
-from arcpy.sa import *
-
-# Make sure Spatial Analyst is available
-arcpy.CheckOutExtension("Spatial")
-
-
-class SmartRaster:
-    def __init__(self, raster_name):
-        """Initialize SmartRaster with the raster dataset name."""
-        self.name = raster_name
-        self.bands = []
-        try:
-            if arcpy.Exists(raster_name):
-                raster = arcpy.Raster(raster_name)
-                band_count = raster.bandCount
-
-                # Load individual bands (Band_1, Band_2, ...)
-                for i in range(1, band_count + 1):
-                    band = arcpy.Raster(f"{raster_name}/Band_{i}")
-                    self.bands.append(band)
-
-                print(f"{band_count} bands loaded from {raster_name}")
-            else:
-                print(f"Raster {raster_name} does not exist.")
-        except Exception as e:
-            print(f"Error loading raster bands: {e}")
+      
 
 
 
-# Now we have the two bands.     #     #   calculate (NIR-Red)/(NIR+red), which is the formula for #     #   NDVI. 
-#  Embed in a try/except block, so we can catch any errors that might occur
-# Calculate the NDVI, and return an "okay, ndvi" if it worked,  #     #   okay, e as the exception if it didn't.
-#     #your code:
+    #     # Now we have the two bands.    
+    #     #   calculate (NIR-Red)/(NIR+red), which is the formula for
+    #     #   NDVI. 
+
+    #     #  Embed in a try/except block, so we can catch any errors that might occur
+
+    #     # Calculate the NDVI, and return an "okay, ndvi" if it worked, 
+    #     #   okay, e as the exception if it didn't.
+
+    #     #your code:
 
 
-
-    def calculate_ndvi(self, band4_index=4, band3_index=3):
-        """Calculate NDVI using the NIR and Red bands."""
-        okay = True
-        try:
-            # Adjust for 0-based indexing in Python
-            nir = self.bands[band4_index - 1]
-            red = self.bands[band3_index - 1]
-
-            numerator = Minus(nir, red)
-            denominator = Plus(nir, red)
-
-            # Prevent division by zero
-            ndvi_raster = Divide(numerator, Con(denominator != 0, denominator, 1))
-
-            return okay, ndvi_raster
-        except Exception as e:
-            okay = False
-            return okay, f"Error calculating NDVI: {e}"
-
+       
 
 
 
@@ -112,106 +71,61 @@ class SmartRaster:
 
 
 # Potential smart vector layer
-[f.name for f in arcpy.ListFields("Corvallis_parcels") if f.type == "OID"]
 
-
-class SmartVectorLayer:
-    def __init__(self, feature_class_path):
-        """Initialize with a path to a vector feature class"""
-        self.feature_class = feature_class_path
+# class SmartVectorLayer:
+#     def __init__(self, feature_class_path):
+#         """Initialize with a path to a vector feature class"""
+#         self.feature_class = feature_class_path
         
-        # Check if it exists
-        if not arcpy.Exists(self.feature_class):
-            raise FileNotFoundError(f"{self.feature_class} does not exist.")
-    def summarize_field(self, field):
-        # set up a tracking variable to track if things work
-        okay = True
+#         # Check if it exists
+#         if not arcpy.Exists(self.feature_class):
+#             raise FileNotFoundError(f"{self.feature_class} does not exist.")
+#     def summarize_field(self, field):
+#         # set up a tracking variable to track if things work
+#         okay = True
 
-        #check if the field is in the legit list
-        try: 
-            existing_fields = [f.name for f in arcpy.ListFields(self.feature_class)]
-            if field not in existing_fields:
-                okay = False
-                print(f"The field {field} is not in list of possible fields")
-                return False, None
-        except Exception as e:
-            print(f"Problem checking the fields: {e}")
+#         #check if the field is in the legit list
+#         try: 
+#             existing_fields = [f.name for f in arcpy.ListFields(self.feature_class)]
+#             if field not in existing_fields:
+#                 okay = False
+#                 print(f"The field {field} is not in list of possible fields")
+#                 return False, None
+#         except Exception as e:
+#             print(f"Problem checking the fields: {e}")
 
-        # now go through and get the mean value
-        try: 
-            with arcpy.da.SearchCursor(self.feature_class, [field]) as cursor:
-                vals = [row[0] for row in cursor if row[0] is not None and not math.isnan(row[0])]
-            mean = sum(vals)/len(vals)
-            return okay, mean
-        except Exception as e:
-            print(f"Problem calculating mean: {e}")
-            okay = False
-            return okay, None
+#         # now go through and get the mean value
+#         try: 
+#             with arcpy.da.SearchCursor(self.feature_class, [field]) as cursor:
+#                 vals = [row[0] for row in cursor if row[0] is not None and not math.isnan(row[0])]
+#             mean = sum(vals)/len(vals)
+#             return okay, mean
+#         except Exception as e:
+#             print(f"Problem calculating mean: {e}")
+#             okay = False
+#             return okay, None
 
-  def zonal_stats_to_field(self, raster_path, statistic_type="MEAN", output_field="ZonalStat"):
-    """
-    For each feature in the vector layer, calculates the zonal statistic from the raster
-    and writes it to a new field.
+    
+#     def zonal_stats_to_field(self, raster_path, statistic_type="MEAN", output_field="ZonalStat"):
+#         """
+#         For each feature in the vector layer, calculates the zonal statistic from the raster
+#         and writes it to a new field.
+        
+#         Parameters:
+#         - raster_path: path to the raster
+#         - statistic_type: type of statistic ("MEAN", "SUM", etc.)
+#         - output_field: name of the field to create to store results
+#         """
+#         # set up a tracking variable to track if things work
+#         okay = True
 
-    Parameters:
-    - raster_path: path to the raster
-    - statistic_type: type of statistic ("MEAN", "SUM", etc.)
-    - output_field: name of the field to create to store results
-    """
-    # set up a tracking variable to track if things work
-    okay = True
+#         # Add a field to store the zonal stats result.
+#         #  If the field already exists, however, return to the user
+#         #  to let them know that it exists. 
 
-    try:
-        # Check if output_field already exists
-        field_names = [f.name for f in arcpy.ListFields(self.feature_class)]
-        if output_field in field_names:
-            print(f"Field '{output_field}' already exists in feature class.")
-            okay = False
-            return okay
+#         #Your code
 
-        # Use OBJECTID_1 as the zone field
-        zone_field = "OBJECTID_1"
 
-        # Create a temporary output table
-        zonal_table = "in_memory/zonal_stats"
-
-        # Run Zonal Statistics as Table
-        arcpy.sa.ZonalStatisticsAsTable(
-            in_zone_data=self.feature_class,
-            zone_field=zone_field,
-            in_value_raster=raster_path,
-            out_table=zonal_table,
-            ignore_nodata="DATA",
-            statistics_type=statistic_type
-        )
-
-        # Add a new field to store the result
-        arcpy.AddField_management(self.feature_class, output_field, "DOUBLE")
-
-        # Join the zonal stats table to the vector layer
-        arcpy.JoinField_management(
-            in_data=self.feature_class,
-            in_field=zone_field,
-            join_table=zonal_table,
-            join_field=zone_field,
-            fields=[statistic_type]
-        )
-
-        # Copy the stat value into the new field
-        with arcpy.da.UpdateCursor(self.feature_class, [statistic_type, output_field]) as cursor:
-            for stat_val, _ in cursor:
-                cursor.updateRow([stat_val, stat_val])
-
-        # Delete the temporary stat field
-        arcpy.DeleteField_management(self.feature_class, [statistic_type])
-
-        print(f"Zonal statistics successfully written to '{output_field}'.")
-        return okay
-
-    except Exception as e:
-        print(f"Error performing zonal stats: {e}")
-        okay = False
-        return okay
 
       
 

@@ -70,7 +70,7 @@ print(r.metadata["bounds"])
 #       The method should return a tuple with the okay, NDVI_object
 
 #  Again, you'll need to add code to the calculate_ndvi function
-r = l4.SmartRaster("Landsat_image_corv")  # make sure you have the right raster here
+
 okay, ndvi = r.calculate_ndvi()
 
 # Assuming this is okay, write it to a new raster that we can use later
@@ -97,7 +97,7 @@ else:
 
 #  Your answer:
 
-# Because it's already set in the function definition, so it defaults to those values if not specified.
+
 
 
 ##########################################################
