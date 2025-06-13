@@ -147,7 +147,8 @@ smart_vector.save_as("Corvallis_parcels_plusNDVI")
 #Your answer
 
 
-
+# Yeah, I think I used the corvallis_parcels that wasn't edited in any kind of way so I have a ton of zero
+#and null values. But for the ones that actually had data, yeah it looks good. :) 
 
 
 
