@@ -172,8 +172,9 @@ okay, df = smart_vector.extract_to_pandas_df()
 #   call to the method, and how do I use it in the
 #   code?  
 
-# Your answer
-
+# Your answer 
+# Copilot says it makes the fields parameter optional, allowing the user to specify which 
+# fields to extract from the feature class. Otherwise, it defaults to None, meaning all fields are extracted.
 
 
 
@@ -209,7 +210,7 @@ sp.scatterplot(x_field, y_field, x_min=1901, x_max = 2030)
 
 
 # Your answer:
-
+# it's basically the same rule making a minimum value to include in the plot.
 
 
 
@@ -246,6 +247,18 @@ param_file = 'params_1.csv'  #  this assumes you've placed in the
                             # python code directory you're working in here. 
 # Your code:
 
+param_file2 = 'params_2.csv'  
+
+ok = sp.plot_from_file(param_file2)
+if ok:
+    print("Done plotting")
+
+param_file3 = 'params_3.csv'  
+
+ok = sp.plot_from_file(param_file3)
+if ok:
+    print("Done plotting")
+
 
 
 #  My code
@@ -266,20 +279,23 @@ if ok:
 #    journal. 
 #   Try a couple different variants of fields and ranges
 
+
+
 # Question 8.1
 #  What will happen if you give it a field that is not
 #    numeric?   How might you make this work better?
 
 # Your answer
 
-
+# it just wouldn't work - scatterplots are for numerical data. you could make a check for the data type 
+#or tell it to make a different kind of plot for caterogical data, like a bar plot or something.
 
 
 # Question 8.2
 #  In your lab document, paste in a couple of the
 #    examples of the output .png files. 
 
-
+# Okay :) 
 
 # Question 8.3
 #   I don't like having to type the name of the 
@@ -289,6 +305,6 @@ if ok:
 #   how you might achieve that?
 
 # Your answer:
-
+# make a for loop auto-generating the file output name based on the paramter names. 
 
 

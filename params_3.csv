@@ -1,0 +1,4 @@
+Param,Value
+x_field,STRUCT_VAL
+y_field ,NDVI_mean
+outfile,scatterplot_structval_vs_NDVI_mean.png

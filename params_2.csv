@@ -1,0 +1,4 @@
+Param,Value
+x_field,MAIN_SQ_FT
+y_field ,NDVI_mean
+outfile,scatterplot_mainsqft_vs_NDVI_mean.png
